@@ -77,3 +77,24 @@ export const getAllResponses = async (req, res) => {
     res.status(500).send({ message: 'Error retrieving forms', error: error.message });
   }
 };
+
+// Function to delete a form response by ID
+export const deleteForm = async (req, res) => {
+  try {
+    const { id } = req.params;
+    
+    // Find and delete the form by ID
+    const deletedForm = await Form.findByIdAndDelete(id);
+
+    // Check if the form was found and deleted
+    if (!deletedForm) {
+      return res.status(404).send({ message: 'Form not found' });
+    }
+
+    // Send a success response
+    res.status(200).send({ message: 'Form deleted successfully' });
+  } catch (error) {
+    // Send an error response if something goes wrong
+    res.status(500).send({ message: 'Error deleting form', error: error.message });
+  }
+};

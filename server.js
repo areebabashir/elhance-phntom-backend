@@ -7,6 +7,8 @@ import formRoutes from './routes/formRoute.js';
 import authRoutes from './routes/authRoute.js';
 import eventRoutes from './routes/eventRoute.js';
 import contactRoutes from './routes/contactRoute.js'
+import trafficRoutes from './routes/trafficRoute.js';
+
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -36,6 +38,7 @@ app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/form', formRoutes);
 app.use('/api/v1/event', eventRoutes);
 app.use('/api/v1/contact', contactRoutes);
+app.use('/api/v1/traffic', trafficRoutes);
 
 // Test API endpoint
 app.get('/', (req, res) => {
