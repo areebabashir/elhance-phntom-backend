@@ -2,17 +2,19 @@ import express from 'express';
 import connectDB from './config/db.js';
 import cors from 'cors';
 import bodyParser from 'body-parser';
+
 import formRoutes from './routes/formRoute.js';
 import authRoutes from './routes/authRoute.js';
 import eventRoutes from './routes/eventRoute.js';
-import contactRoutes from './routes/contactRoute.js';
+import contactRoutes from './routes/contactRoute.js'
 import trafficRoutes from './routes/trafficRoute.js';
+
 import path from 'path';
 import { fileURLToPath } from 'url';
+
 import dotenv from 'dotenv';
-
 dotenv.config();
-
+ 
 // Define __dirname for ES Module context
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -24,9 +26,9 @@ const app = express();
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
+app.use(bodyParser.json()); // Add this line to parse JSON bodies
 app.use(cors());
-app.use(express.json());
+app.use(express.json()); // This line is redundant with bodyParser.json(), but it's okay to keep
 
 // Serve static files from the 'uploads' directory
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
@@ -43,5 +45,9 @@ app.get('/', (req, res) => {
   res.send('<h1>Welcome to ecommerce app</h1>');
 });
 
-// Export the app
-export default app;
+const PORT = process.env.PORT || 8080;
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`Server Running on port ${PORT}`);
+});
